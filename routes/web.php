@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('c
 
 Route::prefix('admin')
     ->namespace('Admin')
+    ->middleware(['auth','admin']) //dari file kernel.php
     ->group(function(){
         Route::get('/',[DashboardController::class, 'index']);
     });
+
+Auth::routes();
+
+
+
